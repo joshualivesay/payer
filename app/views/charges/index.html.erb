@@ -1,0 +1,44 @@
+<section class="sec-dummy-top-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <div class="iconbox-xtiny center"></div>
+        <h6 class="uppercase text-brown nopadding">Send Money Here</h6>
+        <h3 class="uppercase roboto-slab paddtop1">Enter amount and complete form</h3>
+        <div class="title-line-4 brown less-margin align-center"></div>
+        <p class="sub-title-2">This is a secure payment method.  (Check out stripe and stripe checkout if concerned.)</p>
+        <% if @amount %>
+          <%= form_tag charges_path do %>
+              <article>
+                <% if flash[:error].present? %>
+                    <div id="error_explanation">
+                      <p><%= flash[:error] %></p>
+                    </div>
+                <% end %>
+                <label class="amount">
+                  <span>Amount: $<%= @amount.to_i %>.00</span>
+                </label>
+              </article>
+
+              <input type="hidden" name="amount_in_cents" id="amount_in_cents" value="<%= @amount_in_cents%>" />
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                      data-description="A month's subscription"
+                      data-amount="<%= @amount_in_cents %>"
+                      data-locale="auto"></script>
+
+          <% end %>
+        <% else %>
+        <form action="/charges" method="get">
+          <label for="amount">Amount in Dollars:  </label>
+          <input name="amount" id="amount" type="number"
+                 pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$"
+                 value="0.00">
+          <input type="submit">
+        </form>
+        <% end %>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</section>

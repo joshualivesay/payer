@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
   resources :angels
   resources :landings
-  root 'angels#index'
-
-
-  get '/about.html', to: 'templates#about'
-  get '/contact.html', to: 'templates#contact'
-  get '/events.html', to: 'templates#events'
-  get '/index.html', to: 'templates#index'
-  get '/menu.html', to: 'templates#menu'
-  get '/news.html', to: 'templates#news'
+  root 'charges#index'
+  get '/about', to: 'templates#about'
+  get '/contact', to: 'templates#contact'
+  get '/events', to: 'templates#events'
+  get '/index', to: 'templates#index'
+  get '/menu', to: 'templates#menu'
+  get '/news', to: 'templates#news'
+  resources :charges
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
