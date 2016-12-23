@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Angels</h1>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @amount %>
+    <form action="/angels#create" method="POST">
+      <script
+      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="pk_test_0jdPABG1uWJsVEadh51cs5AI"
+      data-amount="<%= @amount %>"
+      data-name="Angels"
+      data-description="Widget"
+      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+      data-locale="auto"
+      data-panel-label="Donate"
+      data-label="Donate <%= @amount %> with Card"
+      >
+      </script>
+    </form>
+      <% else %>
+        <form name="form" action="/angels" method="GET">
+          <label for="amount">Donate Amount</label>
+          <input name="amount" id="amount" type="text" />
+          <input type="submit" value="Next" />
+        </form>
+      <% end %>
+    </form>
+  </tbody>
+</table>
+<br>
